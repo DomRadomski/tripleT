@@ -7,9 +7,9 @@ const gameboard = (function() {
     //              "", "", "",
     //              "", "", ""];
 
-    board = ["X", "O", "X",
-             "O", "X", "O", 
-             "X", "O", "X"];             
+    board = ["", "", "",
+             "", "", "", 
+             "", "", ""];             
 
     // Read Square
     const getSquare = (squareNum) => {
@@ -27,10 +27,13 @@ const gameboard = (function() {
         board[squareNum] = playerShape;
     };
 
+    // Reset Board
+    const resetBoard = () => board.array.forEach(square => {square.setSquare("")});
+
     // Read Whole Board
     const printBoard = () => console.log(board);
 
-    return {getSquare, setSquare, printBoard}
+    return {getSquare, setSquare, printBoard, resetBoard}
 })();
 
 
@@ -48,4 +51,62 @@ function createPlayer (name, shape) {
 
 }
 
+const player1 = createPlayer("Player 1", "X");
+const player2 = createPlayer("Player 2", "O");
+
+
+const GameController = (function (board, player1, player2) {
+
+    const checkWin = (player) => {
+        const shape = player.getShape();
+
+        return (
+            checkHorizontal(shape) ||
+            checkVertical(shape) ||
+            checkDiagonal(shape)
+        );
+    };
+
+    const checkHorizontal = (shape) => {
+        return (
+            (board.getSquare(0) === shape && board.getSquare(1) === shape && board.getSquare(2) === shape) ||
+            (board.getSquare(3) === shape && board.getSquare(4) === shape && board.getSquare(5) === shape) ||
+            (board.getSquare(6) === shape && board.getSquare(7) === shape && board.getSquare(8) === shape)
+        );
+    };
+
+    const checkVertical = (shape) => {
+        return (
+            (board.getSquare(0) === shape && board.getSquare(3) === shape && board.getSquare(6) === shape) ||
+            (board.getSquare(1) === shape && board.getSquare(4) === shape && board.getSquare(7) === shape) ||
+            (board.getSquare(2) === shape && board.getSquare(5) === shape && board.getSquare(8) === shape)
+        );
+    };
+
+    const checkDiagonal = (shape) => {
+        return (
+            (board.getSquare(0) === shape && board.getSquare(4) === shape && board.getSquare(8) === shape) ||
+            (board.getSquare(2) === shape && board.getSquare(4) === shape && board.getSquare(6) === shape)
+        );
+    };
+
+    let turn = 0;
+
+    const playRound = () => {
+
+        let player = getPlayer();
+        let square = prompt(`${player.getName()} which square would you like to choose?`);
+        board.setSquare(square, player.getShape());
+        board.printBoard();
+        if (checkWin(player)) alert(`${player.getName()} has won.`);
+        turn++;
+    }
+
+    const getPlayer = () => (turn % 2 === 0) ? player1 : player2;
+
+
+
+    return { checkWin, playRound };
+
+})(gameboard, player1, player2);
 
