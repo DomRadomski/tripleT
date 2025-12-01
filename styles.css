@@ -1,0 +1,85 @@
+:root {
+  /* === Base Theme === */
+  --bg-main: #1e232b;           /* Dark grey with blue undertone */
+  --bg-main-light: #2a303a;     /* Slightly lighter for panels/cards */
+  --bg-main-dark: #14171d;      /* Darker for shadows or depth */
+
+  /* === Primary (Blue) === */
+  --primary: #2d8fff;           /* Vibrant blue for grid lines */
+  --primary-light: #62a9ff;     /* Hover/active variations */
+  --primary-dark: #0067d1;      /* For pressed states or bold elements */
+  --primary-transparent: rgba(45, 143, 255, 0.3);
+
+  /* === Accent Colors === */
+  --accent-teal: #33d1c6;       /* Cool teal — pairs beautifully with blues */
+  --accent-cyan: #29e3ff;       /* Slightly more vibrant */
+  --accent-warm: #ffb86c;       /* Soft warm orange for contrast (optional) */
+
+  /* === Text Colors === */
+  --text-main: #e6e9ef;         /* High contrast on dark bg */
+  --text-muted: #b6bbc6;        /* Secondary text */
+  --text-inverse: #0d1117;      /* For buttons on light colors */
+
+  /* === Borders & Shadows === */
+  --border-light: rgba(255, 255, 255, 0.15);
+  --border-strong: rgba(255, 255, 255, 0.3);
+
+  --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* === Page Layout === */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: system-ui, sans-serif;
+}
+
+/* === Game Container === */
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 20vh);
+  grid-template-rows: repeat(3, 20vh);
+  gap: 4px;
+
+  background: var(--primary-dark); /* thin outline around board */
+  padding: 4px;
+  border-radius: 8px;
+}
+
+/* === Squares === */
+.square {
+  background: var(--bg-main);
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 3rem;
+  color: var(--primary);
+  cursor: pointer;
+
+  transition: background 0.2s, transform 0.1s;
+}
+
+.square:hover {
+  background: rgba(45, 143, 255, 0.1);
+}
+
+.square:active {
+  transform: scale(0.96);
+}
+
+i {
+    font-size: 2em;
+    color: var(--text-main);
+}
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Palette Preview</title>
+  <style>
+    :root {
+      --bg-main: #1e232b;
+      --bg-main-light: #2a303a;
+      --bg-main-dark: #14171d;
+
+      --primary: #2d8fff;
+      --primary-light: #62a9ff;
+      --primary-dark: #0067d1;
+      --primary-transparent: rgba(45, 143, 255, 0.3);
+
+      --accent-teal: #33d1c6;
+      --accent-cyan: #29e3ff;
+      --accent-warm: #ffb86c;
+
+      --text-main: #e6e9ef;
+      --text-muted: #b6bbc6;
+      --text-inverse: #0d1117;
+
+      --border-light: rgba(255,255,255,0.15);
+      --border-strong: rgba(255,255,255,0.3);
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: var(--bg-main);
+      font-family: system-ui, sans-serif;
+      color: var(--text-main);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .swatch {
+      background: var(--bg-main-light);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      border: 1px solid var(--border-light);
+    }
+
+    .color-box {
+      height: 100px;
+    }
+
+    .label {
+      padding: 1rem;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-light);
+    }
+  </style>
+</head>
+<body>
+  <h1>Theme Color Palette</h1>
+
+  <div class="palette">
+    <!-- Backgrounds -->
+    <div class="swatch">
+      <div class="color-box" style="background: var(--bg-main);"></div>
+      <div class="label">--bg-main</div>
+    </div>
+    <div class="swatch">
+      <div class="color-box" style="background: var(--bg-main-light);"></div>
+      <div class="label">--bg-main-light</div>
+    </div>
+    <div class="swatch">
+      <div class="color-box" style="background: var(--bg-main-dark);"></div>
+      <div class="label">--bg-main-dark</div>
+    </div>
+
+    <!-- Primary Blues -->
+    <div class="swatch">
+      <div class="color-box" style="background: var(--primary);"></div>
+      <div class="label">--primary</div>
+    </div>
+    <div class="swatch">
+      <div class="color-box" style="background: var(--primary-light);"></div>
+      <div class="label">--primary-light</div>
+    </div>
+    <div class="swatch">
+      <div class="color-box" style="background: var(--primary-dark);"></div>
+      <div class="label">--primary-dark</div>
+    </div>
+
+    <!-- Accents -->
+    <div class="swatch">
+      <div class="color-box" style="background: var(--accent-teal);"></div>
+      <div class="label">--accent-teal</div>
+    </div>
+    <div class="swatch">
+      <div class="color-box" style="background: var(--accent-cyan);"></div>
+      <div class="label">--accent-cyan</div>
+    </div>
+    <div class="swatch">
+      <div class="color-box" style="background: var(--accent-warm);"></div>
+      <div class="label">--accent-warm</div>
+    </div>
+
+    <!-- Text Colors -->
+    <div class="swatch">
+      <div class="color-box" style="background: var(--text-main);"></div>
+      <div class="label">--text-main</div>
+    </div>
+    <div class="swatch">
+      <div class="color-box" style="background: var(--text-muted);"></div>
+      <div class="label">--text-muted</div>
+    </div>
+    <div class="swatch">
+      <div class="color-box" style="background: var(--text-inverse);"></div>
+      <div class="label">--text-inverse</div>
+    </div>
+
+  </div>
+</body>
+</html>
