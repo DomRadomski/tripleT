@@ -48,10 +48,16 @@ body {
   grid-template-rows: repeat(3, 20vh);
   gap: 4px;
 
-  background: var(--primary-dark); /* thin outline around board */
+  background: var(--primary-dark);
   padding: 4px;
   border-radius: 8px;
+
+  box-shadow:
+    0 0 8px var(--accent-cyan),
+    0 0 16px var(--accent-cyan),
+    0 0 24px var(--accent-cyan);
 }
+
 
 /* === Squares === */
 .square {
@@ -81,5 +87,10 @@ body {
 i {
     font-size: 2em;
     color: var(--text-main);
+    text-shadow:
+        0 0 4px var(--accent-cyan),
+        0 0 8px var(--accent-cyan),
+        0 0 12px var(--accent-cyan);
+        
 }
 
