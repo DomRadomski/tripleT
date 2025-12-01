@@ -28,7 +28,12 @@ const gameboard = (function() {
     };
 
     // Reset Board
-    const resetBoard = () => board.array.forEach(square => {square.setSquare("")});
+    const resetBoard = () => {
+        for (let i = 0; i < 9; i++) {
+            board[i] = "";
+        }
+    };
+
 
     // Read Whole Board
     const printBoard = () => console.log(board);
@@ -55,9 +60,9 @@ const player1 = createPlayer("Player 1", "X");
 const player2 = createPlayer("Player 2", "O");
 
 
-const GameController = (function (board, player1, player2) {
+const gameController = (function (board, player1, player2) {
 
-    const checkWin = (player) => {
+    const hasWon = (player) => {
         const shape = player.getShape();
 
         return (
@@ -90,23 +95,43 @@ const GameController = (function (board, player1, player2) {
         );
     };
 
+    const hasFinished = () => {
+        for (let i = 0; i < 9; i++) {
+            const square = board.getSquare(i);
+            if (!square) {   // empty string or undefined
+                return false;
+            }
+        }
+        return true;
+    };
+
+
     let turn = 0;
 
     const playRound = () => {
 
         let player = getPlayer();
         let square = prompt(`${player.getName()} which square would you like to choose?`);
-        board.setSquare(square, player.getShape());
-        board.printBoard();
-        if (checkWin(player)) alert(`${player.getName()} has won.`);
-        turn++;
+
+        if (canPlaySquare(square)) {
+
+            board.setSquare(square, player.getShape()); board.printBoard();
+
+            if (hasWon(player)) { board.resetBoard(); player.increaseScore(); alert(`${player.getName()} has won. ${player1.getName()}: ${player1.getScore()}, ${player2.getName()}: ${player2.getScore()}`);}
+            
+            else if (hasFinished()) {board.resetBoard(); alert("The game has ended in a draw, board reset");}
+            turn++;
+
+        } else {
+            alert("You cannot play there!");
+        }
     }
 
     const getPlayer = () => (turn % 2 === 0) ? player1 : player2;
 
+    const canPlaySquare = (squarenum) => board.getSquare(squarenum) === "";
 
-
-    return { checkWin, playRound };
+    return { playRound };
 
 })(gameboard, player1, player2);
 
