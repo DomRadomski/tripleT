@@ -108,18 +108,18 @@ const gameController = (function (board, player1, player2) {
 
     let turn = 0;
 
-    const playRound = () => {
+    const playRound = (square) => {
 
         let player = getPlayer();
-        let square = prompt(`${player.getName()} which square would you like to choose?`);
+        // let square = prompt(`${player.getName()} which square would you like to choose?`);
 
         if (canPlaySquare(square)) {
 
             board.setSquare(square, player.getShape()); board.printBoard();
 
-            if (hasWon(player)) { board.resetBoard(); player.increaseScore(); alert(`${player.getName()} has won. ${player1.getName()}: ${player1.getScore()}, ${player2.getName()}: ${player2.getScore()}`);}
+            if (hasWon(player)) { board.resetBoard(); player.increaseScore(); }
             
-            else if (hasFinished()) {board.resetBoard(); alert("The game has ended in a draw, board reset");}
+            else if (hasFinished()) {board.resetBoard();}
             turn++;
 
         } else {
@@ -134,4 +134,35 @@ const gameController = (function (board, player1, player2) {
     return { playRound };
 
 })(gameboard, player1, player2);
+
+
+const domController = (function (board, game) {
+
+    const grid = document.querySelector(".container");
+    const squares = document.querySelectorAll(".square");
+    const player1score = document.querySelector(".player1");
+    const player2score = document.querySelector(".player2");
+
+    const renderBoard = () => {
+        
+        for (let i = 0; i < 9; i++) {
+
+            if (board.getSquare(i) === "X") {squares[i].innerHTML = `<i class="fa-solid fa-x"></i>`}
+                else if (board.getSquare(i) === "O") {squares[i].innerHTML = `<i class="fa-regular fa-circle"></i>`}
+                else {{squares[i].innerHTML = ``}}
+        }
+    }
+
+    grid.addEventListener('click', (e) => {
+
+        let square = Number(e.target.classList[1]);
+        game.playRound(square);
+        renderBoard();
+
+        player1score.textContent = player1.getScore(); player2score.textContent = player2.getScore();
+    })
+
+    return({renderBoard})
+
+})(gameboard, gameController);
 
